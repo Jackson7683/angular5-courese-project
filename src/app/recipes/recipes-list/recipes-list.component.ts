@@ -26,7 +26,7 @@ export class RecipesListComponent implements OnInit {
 
   onRecipeSelect(index: number){
     this.recipeSelected.emit(this.recipes[index]);
-    // this.recipesService.selectRecipe(this.recipes[index]);
+    this.recipesService.recipeSelected.emit(this.recipes[index]);
   }
 
 }
