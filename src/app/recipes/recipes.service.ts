@@ -1,4 +1,5 @@
 import { Recipe } from './recipe.model';
+import { EventEmitter } from '@angular/core';
 
 export class RecipesService {
     private recipes: Recipe[] = [
@@ -8,7 +9,8 @@ export class RecipesService {
         'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/2/29/0/0149359_Making-Taco_s4x3.jpg.rend.hgtvcom.616.462.suffix/1371603491866.jpeg')
       ]; 
 
-    private selectedRecipe: Recipe = null;
+    // private selectedRecipe: Recipe = null;
+    recipeSelected = new EventEmitter<Recipe>();
 
     public getRecipes() {
         // return a copy of data object
@@ -18,13 +20,4 @@ export class RecipesService {
     public addRecipe(recipe: Recipe) {
         this.recipes.push(recipe);
     }
-
-    public getSelectedRecipe() {
-        return this.selectedRecipe;
-    }
-
-    public selectRecipe(selectedRecipe: Recipe) {
-        this.selectedRecipe = selectedRecipe;
-    }
-
 }
