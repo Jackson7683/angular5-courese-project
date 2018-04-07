@@ -1,4 +1,7 @@
-<a href="#" class="list-group-item clearfix">
+<a 
+  class="list-group-item clearfix"
+  [ngClass]="{'active': recipe_sel && recipe.name === recipe_sel.name}"
+  style="cursor: pointer">
   <div class="pull-left">
     <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
     <p class="list-gourp-item-text">{{ recipe.description }}</p>
