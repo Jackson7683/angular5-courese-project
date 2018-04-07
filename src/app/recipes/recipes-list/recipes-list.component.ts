@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recipes-list',
@@ -8,25 +9,30 @@ import { RecipesService } from '../recipes.service';
   styleUrls: ['./recipes-list.component.css']
 })
 export class RecipesListComponent implements OnInit {
-  // recipes: Recipe[] = [
-  //   new Recipe('test recipe 1', 'For test recipe 1', 
-  //   'https://static01.nyt.com/images/2016/02/16/dining/16COOKING-SALMONWITHLEEKS2/16COOKING-SALMONWITHLEEKS2-articleLarge.jpg'),
-  //   new Recipe('test recipe 2', 'For test fecipe 2', 
-  //   'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/2/29/0/0149359_Making-Taco_s4x3.jpg.rend.hgtvcom.616.462.suffix/1371603491866.jpeg')
-  // ]; 
-  // selectedRecipe: Recipe;
   private recipes: Recipe[];
-  @Output() recipeSelected = new EventEmitter<Recipe>();
+  private selectedIndex: number;
 
-  constructor(private recipesService: RecipesService) { }
+  constructor(private recipesService: RecipesService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.recipes = this.recipesService.getRecipes();
+    try {
+      this.selectedIndex = this.route.snapshot.params['id'] || null;
+      console.log(`Index is: ${JSON.stringify(this.route.snapshot.params)}`);
+    } catch(e) {
+      console.log(`Error happened in getting selectedIndex: ${e}`);
+    }
   }
 
-  onRecipeSelect(index: number){
-    this.recipeSelected.emit(this.recipes[index]);
-    this.recipesService.recipeSelected.emit(this.recipes[index]);
+  onNavigateToRecipeDetail(index: number){
+    this.selectedIndex = index;
+    this.router.navigate(['/recipes', this.selectedIndex, this.recipes[this.selectedIndex].name]); 
   }
 
+  onCreateNewRecipe() {
+    this.selectedIndex = null;
+    this.router.navigate(['new'], {relativeTo: this.route});
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
 import { Ingredient } from '../../shared/ingredients.model';
@@ -10,15 +11,26 @@ import { ShoppingListService } from '../../shopping-list/shopping-list.service';
   styleUrls: ['./recipes-detail.component.css']
 })
 export class RecipesDetailComponent implements OnInit {
-  @Input() activeRecipe: Recipe;
+  activeRecipe: Recipe;
+  editMode: boolean = false;
   
-  constructor(private recipesService: RecipesService) { }
+  constructor(private recipesService: RecipesService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
-    this.recipesService.recipeSelected
-      .subscribe((selectedRecipe: Recipe) => {
-        console.log(`The selectedRecipe is ${JSON.stringify(selectedRecipe)}`);
-        this.activeRecipe = selectedRecipe;
-      });
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          console.log(params);
+          const id = params['id'];
+          this.activeRecipe = this.recipesService.getRecipesById(id);
+          console.log(`The activeRecipe changed, new value is: ${JSON.stringify(this.activeRecipe)}`);
+        }
+      );
+  }
+
+  navigateToEditRecipe() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 }
