@@ -1,5 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { Ingredient } from '../shared/ingredients.model';
+import 'rxjs/Rx';
+import { Subject } from 'rxjs/Subject';
 
 export class ShoppingListService {
     private ingredients: Ingredient[] = [
@@ -8,7 +10,9 @@ export class ShoppingListService {
     ];
 
     // this cannot be private
-    newIngredientAdded = new EventEmitter<Ingredient>();
+    // A subject is better than EventEmitter, since it serves as both Observable and Observer
+    // and provide functionalities such as next();
+    newIngredientAdded = new Subject<Ingredient>();
 
     public getIngredients() {
         // if this method returns a copy of array, then on the event subscribe, 
