@@ -1,5 +1,4 @@
 import { Recipe } from './recipe.model';
-import { EventEmitter } from '@angular/core';
 
 export class RecipesService {
     private recipes: Recipe[] = [
@@ -8,9 +7,6 @@ export class RecipesService {
         new Recipe('test_recipe_2', 'For test fecipe 2', 
         'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/2/29/0/0149359_Making-Taco_s4x3.jpg.rend.hgtvcom.616.462.suffix/1371603491866.jpeg')
       ]; 
-
-    // private selectedRecipe: Recipe = null;
-    recipeSelected = new EventEmitter<Recipe>();
 
     public getRecipes() {
         // return a copy of data object
