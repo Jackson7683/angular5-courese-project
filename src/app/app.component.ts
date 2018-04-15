@@ -15,5 +15,4 @@ export class AppComponent implements OnInit {
   onHeaderClicked(isRecipesActive: boolean){
     this.isRecipesActive = isRecipesActive;
   }
-
 }

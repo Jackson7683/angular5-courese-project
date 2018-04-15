@@ -8,14 +8,13 @@ import { RecipesDetailComponent } from "./recipes/recipes-detail/recipes-detail.
 import { RecipeItemComponent } from "./recipes/recipes-list/recipe-item/recipe-item.component";
 import { RecipeNotFoundComponent } from './recipes/recipe-not-found/recipe-not-found.component';
 import { ShoppingEditComponent } from "./shopping-list/shopping-edit/shopping-edit.component";
-import { RecipeNewComponent } from './recipes/recipe-new/recipe-new.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'recipes', pathMatch: 'full'},
     { path: 'recipes', component: RecipesComponent, children:[
         { path: '', component: RecipeNotFoundComponent },
-        { path: 'new', component: RecipeNewComponent },
+        { path: 'new', component: RecipeEditComponent },
         { path: ':id/:name', component: RecipesDetailComponent },
         { path: ':id/:name/edit', component: RecipeEditComponent } 
     ]},

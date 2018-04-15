@@ -12,6 +12,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   private ingredients: Ingredient[];
   private newIngredientSubscription: Subscription;
+  private editIngredientSubscription: Subscription;
+  private deleteIngredientSubscription: Subscription;
+  // private selectedIngredient: Ingredient;
 
   constructor(private shoppingListService: ShoppingListService) { }
 
@@ -26,9 +29,32 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
           this.ingredients = this.shoppingListService.getIngredients();
         }
       );
+
+    this.editIngredientSubscription = this.shoppingListService.ingredientEdited
+      .subscribe(
+        (res: {index: number, value: Ingredient}) => {
+          console.log(JSON.stringify(res));
+          this.shoppingListService.editIngredient(res.index, res.value);
+          this.ingredients = this.shoppingListService.getIngredients();
+        }
+      );
+
+    this.deleteIngredientSubscription = this.shoppingListService.ingredientDeleted
+      .subscribe(
+        (index: number) => {
+          this.shoppingListService.deleteIngredient(index);
+          this.ingredients = this.shoppingListService.getIngredients();
+        }
+      );
+  }
+
+  onSelectIngredient(index: number) {
+    // this.selectedIngredient = this.ingredients[index];
+    this.shoppingListService.ingredientStartEdited.next(index);
   }
 
   ngOnDestroy() {
     this.newIngredientSubscription.unsubscribe();
+    this.deleteIngredientSubscription.unsubscribe();
   }
 }
