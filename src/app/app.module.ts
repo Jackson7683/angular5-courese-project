@@ -15,7 +15,6 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { AppDropDownDirective } from './shared/appDropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeNotFoundComponent } from './recipes/recipe-not-found/recipe-not-found.component';
-import { RecipeNewComponent } from './recipes/recipe-new/recipe-new.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipesService } from './recipes/recipes.service';
 
@@ -29,7 +28,6 @@ import { RecipesService } from './recipes/recipes.service';
     RecipesDetailComponent,
     RecipeItemComponent,
     RecipeNotFoundComponent,
-    RecipeNewComponent,
     RecipeEditComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
