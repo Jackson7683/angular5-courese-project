@@ -28,6 +28,18 @@ export class RecipesDetailComponent implements OnInit {
           console.log(`The activeRecipe changed, new value is: ${JSON.stringify(this.activeRecipe)}`);
         }
       );
+
+    this.recipesService.recipeChanged
+      .subscribe(
+        (recipe: Recipe) => {
+          this.activeRecipe = recipe;
+        }
+      )
+  }
+
+  onDeleteRecipe() {
+    this.recipesService.deleteRecipe(this.route.snapshot.params['id']);
+    this.router.navigate(['../../'], {relativeTo: this.route});
   }
 
   navigateToEditRecipe() {

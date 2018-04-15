@@ -1,3 +1,87 @@
-<p>
-  recipe-edit works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeEditForm" (ngSubmit)="onSave()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input 
+          type="text" 
+          name="name" 
+          class="form-control"
+          formControlName="name">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea 
+          type="text" 
+          name="description" 
+          class="form-control"
+          formControlName="description">
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label for="imgPath">Image Path</label>
+        <input 
+          type="text" 
+          name="imgPath" 
+          class="form-control"
+          formControlName="imgPath"
+          #imgPath>
+      </div>
+      <div class="form-group">
+        <img 
+          [src]="imgPath.value" 
+          alt="imgPath.value"
+          *ngIf="imgPath.value"
+          height="200px">
+      </div>
+      <div class="row">
+        <div class="col-xs-12" formArrayName="ingredients">
+          <div 
+            class="row" 
+            *ngFor="let ingredient of recipeEditForm.get('ingredients').controls; let i = index"
+            [formGroupName]="i">
+            <div class="col-xs-6 form-group">
+              <input 
+                type="text" 
+                name="name" 
+                class="form-control"
+                formControlName="name">
+            </div>
+            <div class="col-xs-4 form-group">
+              <input 
+                type="number" 
+                name="amount" 
+                class="form-control"
+                formControlName="amount">
+            </div>
+            <div class="col-xs-2 form-group">
+              <button 
+                type="button"
+                class="btn btn-danger"
+                (click)="onDeleteIngredient(i)">X</button>
+            </div>
+          </div>
+          <hr>
+          <div class="form-group">
+            <button 
+              type="button"
+              class="btn btn-success"
+              (click)="onAddIngredientToRecipe()">Add ingredient</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button 
+            type="submit" 
+            class="btn btn-primary"
+            [disabled]="recipeEditForm.invalid">Save</button>
+          <button 
+            type="button" 
+            class="btn btn-danger"
+            (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

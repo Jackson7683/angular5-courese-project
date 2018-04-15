@@ -1,16 +1,18 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-recipes-list',
   templateUrl: './recipes-list.component.html',
   styleUrls: ['./recipes-list.component.css']
 })
-export class RecipesListComponent implements OnInit {
+export class RecipesListComponent implements OnInit, OnDestroy {
   private recipes: Recipe[];
   private selectedIndex: number;
+  private recipeChange: Subscription;
 
   constructor(private recipesService: RecipesService,
               private router: Router,
@@ -24,6 +26,13 @@ export class RecipesListComponent implements OnInit {
     } catch(e) {
       console.log(`Error happened in getting selectedIndex: ${e}`);
     }
+
+    this.recipeChange = this.recipesService.recipeChanged
+      .subscribe(
+        (recipe: Recipe) => {
+          this.recipes = this.recipesService.getRecipes();
+        }
+      )
   }
 
   onNavigateToRecipeDetail(index: number){
@@ -34,5 +43,9 @@ export class RecipesListComponent implements OnInit {
   onCreateNewRecipe() {
     this.selectedIndex = null;
     this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
+  ngOnDestroy() {
+    this.recipeChange.unsubscribe();
   }
 }
