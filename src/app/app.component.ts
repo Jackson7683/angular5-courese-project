@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   isRecipesActive: boolean = false;
 
+  constructor() {}
+
   ngOnInit(){
     // this.isRecipesActive = false;
   }

@@ -17,6 +17,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeNotFoundComponent } from './recipes/recipe-not-found/recipe-not-found.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipesService } from './recipes/recipes.service';
+import { DataStorage } from './shared/dataStorage.service';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { RecipesService } from './recipes/recipes.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService, RecipesService],
+  providers: [ShoppingListService, RecipesService, DataStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
