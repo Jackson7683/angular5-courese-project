@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,20 @@ export class AppComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(){
-    // this.isRecipesActive = false;
+  ngOnInit() {
+    // initialize the firebase SDK 
+    const config = {
+      apiKey: "AIzaSyDES0RukB6CELgKF0re7CRgl_yVr0XPA9I",
+      authDomain: "angular5-demo-bb163.firebaseapp.com",
+      databaseURL: "https://angular5-demo-bb163.firebaseio.com",
+      projectId: "angular5-demo-bb163",
+      storageBucket: "angular5-demo-bb163.appspot.com",
+      messagingSenderId: "976088775961"
+    };
+    firebase.initializeApp(config);
   }
 
-  onHeaderClicked(isRecipesActive: boolean){
+  onHeaderClicked(isRecipesActive: boolean) {
     this.isRecipesActive = isRecipesActive;
   }
 }
