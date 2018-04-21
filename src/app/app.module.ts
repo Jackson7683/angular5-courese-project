@@ -18,6 +18,10 @@ import { RecipeNotFoundComponent } from './recipes/recipe-not-found/recipe-not-f
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipesService } from './recipes/recipes.service';
 import { DataStorage } from './shared/dataStorage.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGard } from './auth/authGard.service';
 
 
 @NgModule({
@@ -32,7 +36,9 @@ import { DataStorage } from './shared/dataStorage.service';
     RecipeEditComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    AppDropDownDirective
+    AppDropDownDirective,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,7 @@ import { DataStorage } from './shared/dataStorage.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService, RecipesService, DataStorage],
+  providers: [ShoppingListService, RecipesService, DataStorage, AuthService, AuthGard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

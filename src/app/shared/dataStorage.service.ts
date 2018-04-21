@@ -1,20 +1,25 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { Recipe } from "../recipes/recipe.model";
+import { AuthService } from "../auth/auth.service";
 import { Response } from "@angular/http/src/static_response";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/Rx';
 
 @Injectable()
 export class DataStorage {
-    constructor(private http: Http) {}
+    constructor(private http: Http,
+                private authService: AuthService) {}
 
     saveRecipes(url: string, recipes: Recipe[]) {
+        const token = this.authService.getToken();   
         return this.http.put(url, recipes);
     }
 
     fetchRecipes(url: string) {
-        return this.http.get(url)
+        const token = this.authService.getToken();
+        
+        return this.http.get(`${url}?auth=${token}`)
             .map(
                 // map method provided by rxjs/Rx will automatically wrap returned data into a new observable
                 (response: Response) => {
@@ -31,5 +36,6 @@ export class DataStorage {
                     }
                 }
             )
+        
     }
 }
