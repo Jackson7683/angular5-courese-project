@@ -10,7 +10,7 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { AuthGard } from '../auth/authGard.service';
 
 const recipesRoutes: Routes = [
-    { path: 'recipes', component: RecipesComponent, canActivate: [AuthGard], children:[
+    { path: '', component: RecipesComponent, canActivate: [AuthGard], children:[
         { path: '', component: RecipeNotFoundComponent },
         { path: 'new', component: RecipeEditComponent },
         { path: ':id/:name', component: RecipesDetailComponent },

@@ -31,8 +31,8 @@ export class AuthService {
                         .then(
                             token => {
                                 this.token = token;
-                                console.log(`Now navigate user to Recipes page...`);
-                                this.router.navigate(['./recipes']);
+                                console.log(`Now navigate user to Home page...`);
+                                this.router.navigate(['./homes']);
                             }
                         )    
                         .catch(e => {

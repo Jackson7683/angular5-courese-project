@@ -23,8 +23,4 @@ export class AppComponent implements OnInit {
     };
     firebase.initializeApp(config);
   }
-
-  onHeaderClicked(isRecipesActive: boolean) {
-    this.isRecipesActive = isRecipesActive;
-  }
 }

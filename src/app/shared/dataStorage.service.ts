@@ -13,7 +13,7 @@ export class DataStorage {
 
     saveRecipes(url: string, recipes: Recipe[]) {
         const token = this.authService.getToken();   
-        return this.http.put(url, recipes);
+        return this.http.put(`${url}?auth=${token}`, recipes);
     }
 
     fetchRecipes(url: string) {
