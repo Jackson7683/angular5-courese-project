@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
 
-import { DataStorage } from '../shared/dataStorage.service';
-import { RecipesService } from '../recipes/recipes.service';
-import { Recipe } from '../recipes/recipe.model';
-import { AuthService } from '../auth/auth.service';
+import { DataStorage } from '../../shared/dataStorage.service';
+import { RecipesService } from '../../recipes/recipes.service';
+import { Recipe } from '../../recipes/recipe.model';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ngOnInit(){
         let authStatus = this.authService.isAuthenticated();
         if(authStatus) {
-            this.router.navigate(['/recipes']);
+            this.router.navigate(['/homes']);
         }else {
             this.router.navigate(['./signin']);
         }
